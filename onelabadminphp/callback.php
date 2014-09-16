@@ -44,7 +44,7 @@ if( $access_token != "")
 	  setcookie( "access_token", $access_token, $expiry , '', '', true, true);
     
 	  //header("Location: index.php"); 
-	  die('onelabadminphp/index.php');
+	  die('index.php');
     
   }
   catch(Exception $e)
