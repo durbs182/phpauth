@@ -18,7 +18,7 @@ $state="$time$rand"; ?>
         $(function () {
             var authorizationUrl = 'http://localhost/WebHostwin/users/oauth/authorize';
             var client_id = 'implicitclient';
-            var redirect_uri = 'https://localhost/ImplicitFlow/callback.cshtml';
+            var redirect_uri = 'https://onelabdemo.azurewebsites.net/onelabadminphp/callback.cshtml';
             var response_type = "token";
             var scope = "read";
             var state = "<?php echo $state; ?>" ;
