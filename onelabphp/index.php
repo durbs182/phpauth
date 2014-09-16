@@ -3,8 +3,12 @@
 $expiry = new DateTime("now");
 $expiry->setTimezone(new DateTimezone("Etc/UTC")); 
 
+//$redirect = "Location: http://localhost/webhostwin/onelab/oauth/authorize?client_id=codeclient&response_type=code&scope=read+write&redirect_uri=https%3A%2F%2Flocalhost%2Ftestphp%2Fcallback.php"; /* Redirect browser */
+//$redirect = "Location: http://localhost/webhostwin/users/oauth/authorize?client_id=codeclient&response_type=code&scope=read+write&redirect_uri=https%3A%2F%2Flocalhost%2Ftestphp%2Fcallback.php"; /* Redirect browser */
+//$redirect = "Location: https://onelabscheduler.onelab.citrix.com/onelabauthwin/onelabdemo/oauth/authorize?client_id=onelabphp&response_type=code&scope=logon&redirect_uri=https%3A%2F%2Fmac-win8.eng.citrite.net%2Ftestphp%2Fcallback.php"; /* Redirect browser */
+$redirect = "Location: https://onelabscheduler.onelab.citrix.com/onelabauthwin/onelabdemo/oauth/authorize?client_id=onelabphp&response_type=code&scope=logon+read&redirect_uri=https%3A%2F%2F10.8.9.10%2Fonelabphp%2Fcallback.php"; /* Redirect browser */
+//$redirect = "Location: https://onelabscheduler.onelab.citrix.com/onelabauthwin/onelab/oauth/authorize?client_id=onelabphp&response_type=code&scope=logon+read&redirect_uri=https%3A%2F%2F10.70.33.18%2Fonelabphp%2Fcallback.php"; /* Redirect browser */
 
-$redirect = "Location: https://onelabscheduler.onelab.citrix.com/onelabauthwin/onelabdemo/oauth/authorize?client_id=onelabphp&response_type=code&scope=logon+read&redirect_uri=https%3A%2F%2Fonelabdemo.azurewebsites.net%2Fonelabphp%2Fcallback.php"; /* Redirect browser */
 
 if (isset($_COOKIE["access_token"]))
 {
