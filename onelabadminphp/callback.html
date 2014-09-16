@@ -17,8 +17,6 @@
         var baseUrl = 'https://localhost/ImplicitFlow/callback.php';
         var identityUrl = baseUrl;
 
-        
-
         $(function () {
             function log(msg) {
                 $("<li>").html(msg).appendTo("ul")
@@ -36,8 +34,12 @@
                 log("error: " + params.error);
                 return;
             }
-
+			
             var state = sessionStorage["state"];
+			
+			log(params.state);
+			log(state);
+			
             if (params.state !== state) {
                 log("error: bad state");
                 return;
