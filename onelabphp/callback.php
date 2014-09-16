@@ -18,7 +18,7 @@
    {
 		//$data = array('grant_type' => 'authorization_code', 'code' => $_GET['code'], 'redirect_uri' => 'https://localhost/testphp/callback.php');
 		//$data = array('grant_type' => 'authorization_code', 'code' => $_GET['code'], 'redirect_uri' => 'https://mac-win8.eng.citrite.net/testphp/callback.php');
-		$data = array('grant_type' => 'authorization_code', 'code' => $_GET['code'], 'redirect_uri' => 'https://10.8.9.10/onelabphp/callback.php');
+		$data = array('grant_type' => 'authorization_code', 'code' => $_GET['code'], 'redirect_uri' => 'https://onelabdemo.azurewebsites.net/onelabphp/callback.php');
 
 		$basic = base64_encode('onelabphp:secret');
 		//$basic = base64_encode('codeclient:secret');
