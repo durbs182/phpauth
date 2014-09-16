@@ -17,24 +17,7 @@
         var baseUrl = 'https://localhost/ImplicitFlow/callback.php';
         var identityUrl = baseUrl;
 
-        function HttpBearerTokenClient(token) {
-            this.scheme = "Bearer";
-            this.token = token;
-        }
-        HttpBearerTokenClient.prototype.get = function (url) {
-            var scheme = this.scheme;
-            var token = this.token;
-            console.log(url);
-            var settings = {
-                type: "GET",
-                url: url,
-                dataType:"json",
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", scheme + " " + token);
-                }
-            };
-            return $.ajax(settings);
-        }
+        
 
         $(function () {
             function log(msg) {

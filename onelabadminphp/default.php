@@ -32,7 +32,7 @@ $state="$time$rand"; ?>
                     "scope=" + encodeURI(scope) + "&" + 
                     "state=" + encodeURI(state);
                 sessionStorage["state"] = state;
-                window.location = url;
+                //window.location = url;
             });
         });
 
