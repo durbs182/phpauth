@@ -1,62 +1,82 @@
 
 <?php
 
-function startsWith($haystack, $needle)
-{
-     $length = strlen($needle);
-     return (substr($haystack, 0, $length) === $needle);
-}
+	$secret = base64_decode('1fTiS2clmPTUlNcpwYzd5i4AEFJ2DEsd8TcUsllmaKQ=');
+	ini_set('display_errors', 'On');
+	
+   //echo $_GET['code'];  //Output: myquery
+   
+   //$code = $_GET['code']
+   
+   if((include_once 'JWT.php'))
+   {
+	 //echo 'ok';
+   }
+   
+   
+   if(count($_GET) > 0 && isset($_GET['code']))
+   {
+		//$data = array('grant_type' => 'authorization_code', 'code' => $_GET['code'], 'redirect_uri' => 'https://localhost/testphp/callback.php');
+		//$data = array('grant_type' => 'authorization_code', 'code' => $_GET['code'], 'redirect_uri' => 'https://mac-win8.eng.citrite.net/testphp/callback.php');
+		$data = array('grant_type' => 'authorization_code', 'code' => $_GET['code'], 'redirect_uri' => 'http://onelabdemo.azurewebsites.net/onelabadminphp/callback.php');
 
-include_once 'JWT.php';
+		$basic = base64_encode('onelabphp:secret');
+		//$basic = base64_encode('codeclient:secret');
+		
+		// use key 'http' even if you send the request to https://...
+		$options = array(
+			'http' => array(
+				'header'  => "Content-Type: application/x-www-form-urlencoded\r\nAuthorization: Basic $basic\r\n",
+				'method'  => 'POST',
+				'content' => http_build_query($data),
+			),
+		);
+		$context  = stream_context_create($options);
+		//$result = file_get_contents('http://localhost/WebHost/onelab/oauth/token', false, $context);
+		//$result = file_get_contents('http://localhost/WebHost/users/oauth/token', false, $context);
+		$result = file_get_contents('http://onelabscheduler.onelab.citrix.com/onelabauth/onelab/oauth/token', false, $context);
+		//$result = file_get_contents('http://onelabscheduler.onelab.citrix.com/onelabauth/onelab/oauth/token', false, $context);
 
-$secret = base64_decode('1fTiS2clmPTUlNcpwYzd5i4AEFJ2DEsd8TcUsllmaKQ=');
-ini_set('display_errors', 'On');
-  
-$access_token = "";
-  
-if(isset($_SERVER["HTTP_AUTHORIZATION"]))
-{
-  $bearer = $_SERVER["HTTP_AUTHORIZATION"];
-  
-  $bearerStr = "Bearer ";
-  
-  if(startsWith($bearer, $bearerStr))
-  {
-      $pieces = explode($bearerStr, $bearer);
-  
-      //print_r($pieces[1]);
-      $access_token = $pieces[1];
-  }
-}
-    
- //die($access_token);
- 
-if( $access_token != "")
-{
-  try
-  {
-	  $jwt = JWT::decode($access_token,$secret ,true);
+
+		try
+		{
+			$json = json_decode($result);
+		}
+		catch(Exception $e)
+		{
+			$msg = $e->getMessage();
+			header('HTTP/1.1 500 Internal Server Error', true, 500);
+			die('Internal Server Error');
+		}
+		
+		var_dump($json);
+		
+		$access_token = $json->access_token;
+
+		try
+		{
+			$jwt = JWT::decode($access_token,$secret ,true);
 			
-    //var_dump($jwt);
+			var_dump($jwt);
 			
-	  $expiry = $jwt->exp;
+			$expiry = time() + $json->expires_in;
 			
-	  setcookie( "access_token", $access_token, $expiry , '', '', true, true);
-    
-	  //header("Location: index.php"); 
-	  die('index.php');
-    
-  }
-  catch(Exception $e)
-  {
-	  echo 'Caught exception: ',  $e->getMessage(), "\n";
-    die("cc");
-  }
-}
+			setcookie( "access_token", $access_token, $expiry , '', '', true, true);
+			//setcookie( "access_token", $access_token, $expiry , '/testphp', '.eng.citrite.net', true, true);
 
-header('HTTP/1.1 401 Unauthorized', true, 401);
-die('Unauthorized');
-
-
- 
+			
+			header("Location: /onelabadminphp/index.php"); 
+			die('redirect');
+		}
+		catch(Exception $e)
+		{
+			echo 'Caught exception: ',  $e->getMessage(), "\n";
+		}
+	}
+	else
+	{
+		header('HTTP/1.1 401 Unauthorized', true, 401);
+		die('Unauthorized');
+	}
+	
 ?>
