@@ -14,17 +14,25 @@ include_once 'JWT.php';
 $secret = base64_decode('1fTiS2clmPTUlNcpwYzd5i4AEFJ2DEsd8TcUsllmaKQ=');
 ini_set('display_errors', 'On');
 
+$access_token = "";
+
 
 if(count($_GET) > 0 && isset($_GET['state']))
 {
 	$instate = $_GET['state'];
 	$state = $_SESSION['state'];
-	$match = $state == $instate;
 	
-	die("match $match");
-}
-  
-$access_token = "";
+	if($state == $instate)
+	{
+		die("match");
+	}
+	else
+	{
+		die("no match");
+	}
+}  
+   
+
   
 if(isset($_SERVER["HTTP_AUTHORIZATION"]))
 {
@@ -40,8 +48,8 @@ if(isset($_SERVER["HTTP_AUTHORIZATION"]))
       $access_token = $pieces[1];
   }
 }
-  
- 
+
+
 if( $access_token != "")
 {
   try
