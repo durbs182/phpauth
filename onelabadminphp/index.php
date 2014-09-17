@@ -3,7 +3,7 @@
 $expiry = new DateTime("now");
 $expiry->setTimezone(new DateTimezone("Etc/UTC")); 
 
-$redirect = "Location: default.php"; /* Redirect browser */
+$redirect = "Location: login.php"; /* Redirect browser */
 
 
 if (isset($_COOKIE["access_token"]))

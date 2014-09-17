@@ -13,7 +13,7 @@ $state="$time$rand"; ?>
     <script src="Scripts/jquery-2.0.2.js"></script>
     <script>
         $(function () {
-            var authorizationUrl = 'http://localhost/WebHostwin/users/oauth/authorize';
+            var authorizationUrl = 'https://localhost/WebHostwin/users/oauth/authorize';
             var client_id = 'implicitclient';
             var redirect_uri = 'https://onelabdemo.azurewebsites.net/onelabadminphp/callback.html';
             var response_type = "token";
