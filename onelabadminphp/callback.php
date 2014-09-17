@@ -19,8 +19,9 @@ if(count($_GET) > 0 && isset($_GET['state']))
 {
 	$instate = $_GET['state'];
 	$state = $_SESSION['state'];
-	$match = $state == $instate
-	die("$match");
+	$match = $state == $instate;
+	
+	die("match $match");
 }
   
 $access_token = "";
