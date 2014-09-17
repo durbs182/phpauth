@@ -21,11 +21,12 @@ $_SESSION['state']=$state;
     <script src="Scripts/jquery-2.0.2.js"></script>
     <script>
         $(function () {
-            var authorizationUrl = 'https://localhost/WebHostwin/users/oauth/authorize';
-            var client_id = 'implicitclient';
+            //var authorizationUrl = 'https://localhost/WebHostwin/users/oauth/authorize';
+			var authorizationUrl = 'https://onelabscheduler.onelab.citrix.com/onelabauthwin/onelabdemo/oauth/authorize';
+            var client_id = 'auzreweb';
             var redirect_uri = 'https://onelabdemo.azurewebsites.net/onelabadminphp/callback.html';
             var response_type = "token";
-            var scope = "read";
+            var scope = "logon read";
             var state = "<?php echo $state; ?>";
 			
 			var url =
