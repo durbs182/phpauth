@@ -45,7 +45,7 @@
                 return;
             }
 			
-			var identityUrl = baseUrl + "?state=1" + params.state;
+			var stateUrl = baseUrl + "?state=1" + params.state;
 			
 			console.log(identityUrl);
 
@@ -54,7 +54,7 @@
             var response = '';
             var settings = {
                 type: "GET",
-                url: baseUrl,
+                url: stateUrl,
                 async: false,
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("Authorization", "Bearer " + token);
