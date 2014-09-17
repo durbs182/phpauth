@@ -9,6 +9,8 @@ $state="$time$rand";
 
 $_SESSION['state2']=$state;
 
+die($_SESSION['state2']);
+
 ?>
 
 <!DOCTYPE html>
