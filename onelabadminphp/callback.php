@@ -29,7 +29,9 @@ if(isset($_SERVER["HTTP_AUTHORIZATION"]))
   }
 }
     
- //die($access_token);
+$state = $_SESSION['state2'];
+	
+die($state);
  
 if( $access_token != "")
 {
