@@ -7,7 +7,7 @@ $rand = rand();
 
 $state="$time$rand"; 
 
-$_SESSION['state2']=$state;
+$_SESSION['state']=$state;
 
 
 ?>

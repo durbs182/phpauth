@@ -13,6 +13,14 @@ include_once 'JWT.php';
 
 $secret = base64_decode('1fTiS2clmPTUlNcpwYzd5i4AEFJ2DEsd8TcUsllmaKQ=');
 ini_set('display_errors', 'On');
+
+if(count($_GET) > 0 && isset($_GET['state']))
+{
+	$instate = $_GET['state'];
+	$state = $_SESSION['state'];
+	
+	die($state == $instate);
+}
   
 $access_token = "";
   
@@ -30,9 +38,7 @@ if(isset($_SERVER["HTTP_AUTHORIZATION"]))
       $access_token = $pieces[1];
   }
 }
-    
-$state = $_SESSION['state2'];
-die($state);
+  
  
 if( $access_token != "")
 {
@@ -51,8 +57,8 @@ if( $access_token != "")
   }
   catch(Exception $e)
   {
-	  echo 'Caught exception: ',  $e->getMessage(), "\n";
-    die("cc");
+	echo 'Caught exception: ',  $e->getMessage(), "\n";
+    //die("cc");
   }
 }
 
