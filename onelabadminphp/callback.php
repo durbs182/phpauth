@@ -1,6 +1,8 @@
 
 <?php
 
+session_start();
+
 function startsWith($haystack, $needle)
 {
      $length = strlen($needle);
@@ -30,7 +32,6 @@ if(isset($_SERVER["HTTP_AUTHORIZATION"]))
 }
     
 $state = $_SESSION['state2'];
-	
 die($state);
  
 if( $access_token != "")
