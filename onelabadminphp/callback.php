@@ -15,25 +15,6 @@ $secret = base64_decode('1fTiS2clmPTUlNcpwYzd5i4AEFJ2DEsd8TcUsllmaKQ=');
 ini_set('display_errors', 'On');
 
 $access_token = "";
-
-
-
-if(count($_GET) > 0 && isset($_GET['state']))
-{
-	$instate = $_GET['state'];
-	$state = $_SESSION['state'];
-	
-	if($state == $instate)
-	{
-		die("match");
-	}
-	else
-	{
-		die("no match $instate $state");
-	}
-}  
-   
-
   
 if(isset($_SERVER["HTTP_AUTHORIZATION"]))
 {
@@ -50,8 +31,23 @@ if(isset($_SERVER["HTTP_AUTHORIZATION"]))
   }
 }
 
+if(count($_GET) > 0 && isset($_GET['state']))
+{
+	$instate = $_GET['state'];
+	$state = $_SESSION['state'];
+	
+	if($state == $instate)
+	{
+		//die("match");
+	}
+	else
+	{
+		$access_token = "";
+		//die("no match $instate $state");
+	}
+} 
 
-if( $access_token != "")
+if($access_token != "")
 {
   try
   {
