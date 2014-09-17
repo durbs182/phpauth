@@ -68,7 +68,8 @@ if($access_token != "")
   }
 }
 
-die('unauthorized.php');
+header('Location: unauthorized.php',true,302);
+exit;
 
  
 ?>
