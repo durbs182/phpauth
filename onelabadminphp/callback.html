@@ -14,7 +14,7 @@
     <script src="Scripts/jquery-2.0.2.js"></script>
     <script>
         var baseUrl = 'callback.php';
-        var identityUrl = baseUrl;
+        
 
         $(function () {
             function log(msg) {
@@ -44,6 +44,8 @@
 				window.location.href = "callback.php";
                 return;
             }
+			
+			var identityUrl = baseUrl + "?state=" + params.state;
 
             var token = params.access_token;
             console.log("Token Obtained: " + token);
