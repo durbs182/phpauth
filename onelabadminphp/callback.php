@@ -14,7 +14,6 @@ include_once 'JWT.php';
 $secret = base64_decode('1fTiS2clmPTUlNcpwYzd5i4AEFJ2DEsd8TcUsllmaKQ=');
 ini_set('display_errors', 'On');
 
-die($_GET['state']);
 
 if(count($_GET) > 0 && isset($_GET['state']))
 {
