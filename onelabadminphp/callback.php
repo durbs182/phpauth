@@ -60,7 +60,6 @@ if($access_token != "")
 	  setcookie( "access_token", $access_token, $expiry , '', '', true, true);
     
 	  die('index.php');
-    
   }
   catch(Exception $e)
   {
@@ -69,9 +68,7 @@ if($access_token != "")
   }
 }
 
-header('HTTP/1.1 401 Unauthorized', true, 401);
-die('Unauthorized');
-
+die('unauthorized.php');
 
  
 ?>

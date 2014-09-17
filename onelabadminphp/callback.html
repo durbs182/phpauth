@@ -59,10 +59,13 @@
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("Authorization", "Bearer " + token);
                 },
-                success: function (text) {
-                    //console.log(text);
+                success: function (text, textStatus, xhr) {
+                    console.log(xhr.status);
                     response = text;
-                }
+                },
+				complete: function(xhr, textStatus) {
+					console.log(xhr.status);
+				} 
             };
 
             $.ajax(settings);
