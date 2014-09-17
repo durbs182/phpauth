@@ -67,7 +67,7 @@ else
     <img src="logo.png" />
  </div>
 
- <h2>Authenticated as: 
+ <h2>Authorized as: 
 	<tr><?php echo $jwt->sub; ?> 
  </h2>
  <h3>Token:</h3>
