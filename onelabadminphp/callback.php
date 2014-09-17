@@ -16,6 +16,7 @@ ini_set('display_errors', 'On');
 
 $access_token = "";
 
+$instate = $_GET['state'];
 
 if(count($_GET) > 0 && isset($_GET['state']))
 {
