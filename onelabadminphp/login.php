@@ -1,8 +1,15 @@
 ﻿<?php 
+
+session_start();
+
 $time = time();
 $rand = rand();
 
-$state="$time$rand"; ?>
+$state="$time$rand"; 
+
+$_SESSION['state2']=$state;
+
+?>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
