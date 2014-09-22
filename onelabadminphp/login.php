@@ -119,7 +119,7 @@ $_SESSION['state']=$state;
            $(function () {
             var authorizationUrl = 'http://localhost/WebHostwin/users/oauth/authorize';
             var client_id = 'codeclient';
-            var redirect_uri = 'https://onelabdemo.azurewebsites.net/onelabadminphp/callback.cshtml';
+            var redirect_uri = 'https://onelabdemo.azurewebsites.net/onelabadminphp/callback.html';
             var response_type = "code";
             var scope = "read write search";
             var state = "<?php echo $state; ?>" ;
