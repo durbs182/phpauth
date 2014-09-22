@@ -1,4 +1,3 @@
-
 <?php
 
 session_start();
@@ -25,8 +24,6 @@ if(isset($_SERVER["HTTP_AUTHORIZATION"]))
   if(startsWith($bearer, $bearerStr))
   {
       $pieces = explode($bearerStr, $bearer);
-  
-      //print_r($pieces[1]);
       $access_token = $pieces[1];
   }
 }
@@ -47,19 +44,19 @@ if(count($_GET) > 0 && isset($_GET['state']))
 	}
 } 
 
+session_destroy();
+
 if($access_token != "")
 {
   try
   {
 	  $jwt = JWT::decode($access_token,$secret ,true);
-			
-    //var_dump($jwt);
-			
+      
 	  $expiry = $jwt->exp;
 			
 	  setcookie( "access_token", $access_token, $expiry , '', '', true, true);
     
-	  die('index.php');
+	  die('start.php');
   }
   catch(Exception $e)
   {
