@@ -118,10 +118,10 @@ $_SESSION['state']=$state;
           
            $(function () {
             var authorizationUrl = 'https://onelabscheduler.onelab.citrix.com/onelabauthwin/onelabdemo/oauth/authorize';
-            var client_id = 'onelabphp';
+            var client_id = 'codeclient';
             var redirect_uri = 'https://onelabdemo.azurewebsites.net/onelabadminphp/callback.html';
             var response_type = "code";
-            var scope = "read logon";
+            var scope = "read write search";
             var state = "<?php echo $state; ?>" ;
             
             var url =
