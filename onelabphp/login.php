@@ -42,6 +42,7 @@ $_SESSION['state']=$state;
 			
 		sessionStorage["state"] = state;
 		window.location = url;
+		}
 </script>
     
 </body>
