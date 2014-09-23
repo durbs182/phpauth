@@ -121,3 +121,4 @@ while (list($key, $value) = each($jwt))
  </tbody>  
  </table>
  </body>
+ </html>
