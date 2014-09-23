@@ -81,33 +81,7 @@
 </head>
 <body>
     
-    <canvas id="state" width="200" height="200">
-        no text
-    </canvas>
 
-    <canvas id="token" width="250" height="120">
-        token here
-    </canvas>
-
-    <div id="arrow">
-        <img src="arrow.png"/>
-    </div>
-
-    <canvas id="valid" width="200" height="200">
-        @*<img id="valid_img" src="valid_token.png" />*@
-    </canvas>
-
-    <div id="resource">
-        <img id="res_img" src="logo_open_sml.png" />
-    </div>
-
-    <canvas id="code" draggable="true" ondragstart="event.dataTransfer.setData('text/plain',null)">
-        no text
-    </canvas>
-
-    <canvas class="dropzone" id="box" width="200" height="400" style="border:0px solid #d3d3d3">
-        no text
-    </canvas>
 
     <script src="Scripts/jquery-2.0.2.js"></script>
     <script>
@@ -136,233 +110,53 @@
                 },
                 error: function (xhr) {
                     console.log("error " + xhr.status);
-                    window.location.href = unauthorized;
+                    //window.location.href = unauthorized;
                 },
                 success: function (data) {
                     //console.log(data);
                     response = data;
                     console.log(response.access_token);
-
-                    SetTokenImage(response.access_token, state);
+					var stateUrl = baseUrl + "?state=" + state;
+                    SendToken(response.access_token, state);
                 }
             };
 
             $.ajax(settings);
         }
 
-        function dragndrop(code,state)
+        function SendToken(access_token, state)
         {
-            var dragged;
-
-            /* events fired on the draggable target */
-            document.addEventListener("drag", function (event) {
-
-            }, false);
-
-            document.addEventListener("dragstart", function (event) {
-                // store a ref. on the dragged elem
-                dragged = event.target;
-                // make it half transparent
-                event.target.style.opacity = .5;
-
-            }, false);
-
-            document.addEventListener("dragend", function (event) {
-                // reset the transparency
-                event.target.style.opacity = "";
-            }, false);
-
-            /* events fired on the drop targets */
-            document.addEventListener("dragover", function (event) {
-                // prevent default to allow drop
-                event.preventDefault();
-            }, false);
-
-            document.addEventListener("dragenter", function (event) {
-                // highlight potential drop target when the draggable element enters it
-                if (event.target.className == "dropzone") {
-                    event.target.style.background = "purple";
-                }
-
-            }, false);
-
-            document.addEventListener("dragleave", function (event) {
-                // reset background of potential drop target when the draggable element leaves it
-                if (event.target.className == "dropzone") {
-                    event.target.style.background = "";
-                }
-            }, false);
-
-            document.addEventListener("drop", function (event) {
-                // prevent default action (open as link for some elements)
-                event.preventDefault();
-                // move dragged elem to the selected drop target
-                if (event.target.className == "dropzone") {
-                    event.target.style.background = "";
-                    dragged.parentNode.removeChild(dragged);
-                    event.target.appendChild(dragged);
-
-                    GetToken(code,state);
-                }
-
-            }, false);
-
-        }
-
-        function SetTokenImage(access_token, state)
-        {
-            //alert(access_token);
-
             var auth = "Authorization: Bearer " + access_token;
+		
+			console.log(stateUrl);
+			var settings = {
+				type: "GET",
+				url: stateUrl,
+				async: false,
+				beforeSend: function (xhr) {
+					xhr.setRequestHeader("Authorization", "Bearer " + access_token);
+				},
+				success: function (text, textStatus, xhr) {
+					console.log(xhr.status);
+					response = text;
+					console.log(response);
+					window.location.href = response;
+				},
+				complete: function (xhr, textStatus) {
+					console.log("complete " + xhr.status);
+					console.log(textStatus);
+				},
+				error: function (xhr) {
+					console.log("error " + xhr.status);
+					//window.location.href = unauthorized;
+				}
+			};
 
-            var words = auth.match(/.{1,35}/g);
-
-            //console.log(words);
-
-            document.getElementById("arrow").style.visibility = "visible";
-            document.getElementById("state").style.visibility = "hidden";
-            document.getElementById("token").style.visibility = "visible";
-
-            var tokencanvas = document.getElementById("token");
-            //tokencanvas.innerHTML = access_token;
-            //console.log(canvasstate.width);
-            var tokencontext = tokencanvas.getContext("2d");
-            
-            var line = '';
-
-            var maxWidth = 60;
-            var lineHeight = 10;
-
-            var x = (tokencanvas.width - 200) / 2;
-            var y = 20;
-
-            for (var n = 0; n < words.length; n++) {
-                var testLine = line + words[n] + ' ';
-
-                var metrics = tokencontext.measureText(testLine);
-                var testWidth = metrics.width;
-                if (testWidth > maxWidth && n > 0) {
-                    tokencontext.fillText(line, x, y);
-                    line = words[n] + ' ';
-                    y += lineHeight;
-                }
-                else {
-                    line = testLine;
-                }
-            }
-
-            tokencontext.fillText(line, x, y);
-
-            var tokenimage = new Image(200,200);
-            tokenimage.onload = function () {
-                tokencontext.drawImage(imageObjstate, 0, 0, tokenimage.width, tokenimage.height, 0, 0, tokencanvas.width, tokencanvas.height);
-                tokencontext.font = "25pt Calibri";
-                tokencontext.fillStyle = 'black';
-                //tokencontext.fillText(line, x, y);
-            };
-           
-            var stateUrl = baseUrl + "?state=" + state;
-            tokencanvas.title = stateUrl;
-
-            tokencanvas.onclick = function (event) {
-                //alert('onmouseup');
-                console.log(stateUrl);
-                var settings = {
-                    type: "GET",
-                    url: stateUrl,
-                    async: false,
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader("Authorization", "Bearer " + access_token);
-                    },
-                    success: function (text, textStatus, xhr) {
-                        console.log(xhr.status);
-                        response = text;
-                        console.log(response);
-                        //window.location.href = response;
-                        document.getElementById("arrow").style.visibility = "hidden";
-                        document.getElementById("box").style.visibility = "hidden";
-                        document.getElementById("resource").style.visibility = "visible";
-                        //document.getElementById("resource").innerHTML = "redirect to -> " + response;
-
-                        var img = document.getElementById("res_img");
-
-                        console.log(img);
-
-                        var a = document.createElement('a');
-                        a.href = response;
-                        var image = document.getElementById('resource').getElementsByTagName('img')[0];
-                        b = a.appendChild(image);
-                        document.getElementById('resource').appendChild(a);
-
-                        var canvasvalid = document.getElementById("valid");
-                        console.log(canvasvalid);
-                        var contextvalid = canvasvalid.getContext("2d");
-                        var validimg = new Image();
-                        validimg.onload = function () {
-                            //contextvalid.drawImage(validimg, 0, 0);
-                            console.log(contextvalid);
-                            contextvalid.drawImage(validimg, 0, 0, validimg.width, validimg.height, 0, 0, canvasvalid.width, canvasvalid.height);
-                            contextvalid.font = "15pt Calibri";
-                            contextvalid.fillText("VALID", 75, 150);
-                        };
-                        validimg.src = "valid_token.png";
-
-                    },
-                    complete: function (xhr, textStatus) {
-                        console.log("complete " + xhr.status);
-                        console.log(textStatus);
-                    },
-                    error: function (xhr) {
-                        console.log("error " + xhr.status);
-                        window.location.href = unauthorized;
-                    }
-                };
-
-                $.ajax(settings);
-            };
-        }
-
-        function setImages(code, state)
-        {
-            var canvas = document.getElementById("code");
-            console.log(canvas); 
-            var context = canvas.getContext("2d");
-            var imageObj = new Image();
-            imageObj.onload = function () {
-                context.drawImage(imageObj, 0, 0);
-                context.font = "10pt Calibri";
-                context.fillText(code, 40, 20);
-            };
-            imageObj.src = "envelope.jpg";
-
-            var canvasbox = document.getElementById("box");
-            console.log(canvasbox);
-            var contextbox = canvasbox.getContext("2d");
-            var imageObjbox = new Image();
-            imageObjbox.onload = function () {
-                contextbox.drawImage(imageObjbox, 0, 0, imageObjbox.width, imageObjbox.height, 0, 0, canvasbox.width, canvasbox.height);
-                contextbox.font = "20pt Calibri";
-                contextbox.fillText("TOKEN", 60, 300);
-            };
-            imageObjbox.src = "postbox.jpg";
-
-            var canvasstate = document.getElementById("state");
-            console.log(canvasstate);
-            var contextstate = canvasstate.getContext("2d");
-            var imageObjstate = new Image();
-            imageObjstate.onload = function () {
-                contextstate.drawImage(imageObjstate, 0, 0, imageObjstate.width, imageObjstate.height, 0, 0, canvasstate.width, canvasstate.height);
-                contextstate.font = "10pt Calibri";
-                contextstate.fillText(state, 53, 145);
-            };
-            imageObjstate.src = "tick.png";
+			$.ajax(settings);
         }
         
         $(function () {
-            function log(msg) {
-                $("<li>").html(msg).appendTo("ul")
-            }
-
+		
             var params = {},
                 queryString = location.search.substring(1),
                 regex = /([^&=]+)=([^&]*)/g,
@@ -387,22 +181,10 @@
                 window.location.href = unauthorized;
                 return;
             }
-            // after validation remove to prevernt -re-use
+            // after validation remove to prevent -re-use
             sessionStorage["state"] = "state is single use only";
-
-            //document.getElementById('code').innerHTML = params.code
-
-            setImages(params.code, params.state);
-            dragndrop(params.code, params.state);
-            
-
-            
-
-            //console.log(redirect);
-
-            
-
-            
+			
+            GetToken(params.code, params.state);
         });
 
     </script>
