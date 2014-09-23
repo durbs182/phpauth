@@ -62,7 +62,7 @@ else
 	<script type="text/javascript">           $(function () { $("#table001").tablesorter({ sortList: [[0, 0]] }); });</script>
 
 <div align="right" >
-    <img src="exit.png" height="42" width="42"/>
+    <a href="logout.php"><img src="exit.png" height="42" width="42"/></a>
  </div>
  
  <div>
