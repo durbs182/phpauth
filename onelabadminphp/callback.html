@@ -124,8 +124,10 @@
 
             var redirect = location.href.replace(location.search, "");
 
-            var formData = "grant_type=authorization_code&code=" + code + "&redirect_uri=" + redirect;
+			var formData = "grant_type=authorization_code&code=" + code + "&redirect_uri=" + redirect;
 
+			console.log(formData);
+			
             var settings = {
                 type: "POST",
                 url: tokenurl,
@@ -136,7 +138,7 @@
                 },
                 error: function (xhr) {
                     console.log("error " + xhr.status);
-                    window.location.href = unauthorized;
+                    //window.location.href = unauthorized;
                 },
                 success: function (data) {
                     //console.log(data);
