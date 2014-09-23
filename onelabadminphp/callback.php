@@ -54,7 +54,7 @@ if($access_token != "")
       
 	  $expiry = $jwt->exp;
 			
-	  setcookie( "access_token", $access_token, $expiry , '', '', true, true);
+	  setcookie( "access_token", $access_token, $expiry , '/', '', true, true);
     
 	  die('start.php');
   }
