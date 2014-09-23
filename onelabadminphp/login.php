@@ -117,7 +117,7 @@ $_SESSION['state']=$state;
           event.target.appendChild( dragged );
           
            $(function () {
-            var authorizationUrl = 'https://onelabscheduler.onelab.citrix.com/onelabauthwin/onelabdemo/oauth/authorize';
+            var authorizationUrl = 'http://localhost/WebHostwin/users/oauth/authorize';
             var client_id = 'codeclient';
             var redirect_uri = 'https://onelabdemo.azurewebsites.net/onelabadminphp/callback.html';
             var response_type = "code";
