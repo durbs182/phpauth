@@ -61,7 +61,9 @@ else
     <script type='text/javascript' src='scripts/jquery.tablesorter.js'></script>
 	<script type="text/javascript">           $(function () { $("#table001").tablesorter({ sortList: [[0, 0]] }); });</script>
 
-
+<div align="right">
+    <img src="exit.png" />
+ </div>
  
  <div>
     <img src="logo.png" />
