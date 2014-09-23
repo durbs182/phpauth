@@ -127,7 +127,7 @@
         function SendToken(access_token, state)
         {
             var auth = "Authorization: Bearer " + access_token;
-		
+			var stateUrl = baseUrl + "?state=" + state;
 			console.log(stateUrl);
 			var settings = {
 				type: "GET",
