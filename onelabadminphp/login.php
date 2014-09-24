@@ -123,7 +123,7 @@ $_SESSION['state']=$state;
             var client_id = 'onelabazure';
             var redirect_uri = 'https://onelabdemo.azurewebsites.net/onelabadminphp/callback.html';
             var response_type = "code";
-            var scope = "read write search";
+            var scope = "read write logon";
             var state = "<?php echo $state; ?>" ;
             
             var url =

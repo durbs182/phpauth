@@ -111,7 +111,7 @@
                 },
                 error: function (xhr) {
                     console.log("error " + xhr.status);
-                    //window.location.href = unauthorized;
+                    window.location.href = unauthorized;
                 },
                 success: function (data) {
                     //console.log(data);
@@ -149,7 +149,7 @@
 				},
 				error: function (xhr) {
 					console.log("error " + xhr.status);
-					//window.location.href = unauthorized;
+					window.location.href = unauthorized;
 				}
 			};
 
@@ -168,7 +168,7 @@
 
             if (params.error) {
                 console.log("error: " + params.error);
-                //window.location.href = unauthorized;
+                window.location.href = unauthorized;
                 return;
             }
 
@@ -179,7 +179,7 @@
             var state = sessionStorage["state"];
             if (params.state !== state) {
                 console.log("error: bad state");
-                //window.location.href = unauthorized;
+                window.location.href = unauthorized;
                 return;
             }
             // after validation remove to prevent -re-use
