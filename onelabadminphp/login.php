@@ -120,7 +120,7 @@ $_SESSION['state']=$state;
             //var authorizationUrl = 'https://localhost/WebHostwin/users/oauth/authorize';
 			var authorizationUrl = 'https://onelabscheduler.onelab.citrix.com/onelabauthwin/users/oauth/authorize';
 			
-            var client_id = 'codeclient';
+            var client_id = 'onelabazure';
             var redirect_uri = 'https://onelabdemo.azurewebsites.net/onelabadminphp/callback.html';
             var response_type = "code";
             var scope = "read write search";
