@@ -23,7 +23,8 @@ $_SESSION['state']=$state;
 
 <script>
 	$(function () {
-		var authorizationUrl = 'http://localhost/WebHostwin/users/oauth/authorize';
+		//var authorizationUrl = 'https://localhost/WebHostwin/users/oauth/authorize';
+		var authorizationUrl = 'https://onelabscheduler.onelab.citrix.com/onelabauthwin/users/oauth/authorize';
 		var client_id = 'codeclient';
 		var redirect_uri = 'https://onelabdemo.azurewebsites.net/onelabphp/callback.html';
 		var response_type = "code";

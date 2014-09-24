@@ -94,8 +94,9 @@
             console.log("state=" + state);
             console.log("code=" + code);
 
-            var tokenurl = "https://localhost/WebHostwin/users/oauth/token";
-
+            //var tokenurl = "https://localhost/WebHostwin/users/oauth/token";
+			var tokenurl = 'https://onelabscheduler.onelab.citrix.com/onelabauthwin/users/oauth/token';
+			
             var redirect = location.href.replace(location.search, "");
 
             var formData = "grant_type=authorization_code&code=" + code + "&redirect_uri=" + redirect;
