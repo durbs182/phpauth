@@ -1,0 +1,412 @@
+
+/* automation report styles*/
+/* colours chosen using Citrix colour palette and the http://www.w3schools.com/tags/ref_colornames.asp - colour reference map */
+    /* color: #0079BD; /* Citrix Ocean */
+    /* color: #844CB0; /* Citrix Grape */
+    /* color: #70963E; /* Citrix Pine */
+    /* color: #4D4F53; /* Citrix Gray */
+    /* color: #000005; /* Citrix Rich Black */
+    /* color: #00598C; /* Citrix Link Colour */
+    /* color: #563173; /* Citrix Followed Link Colour */
+
+body 
+{
+    font: 13px verdana, sans-serif;
+    line-height: 18px;
+    height: 100%;
+}
+
+/* link references */
+a:link 
+{
+    color: #00598C; /* Citrix Link Colour */
+    text-decoration: none;
+}
+
+a:visited {
+    color: #563173; /* Citrix Followed Link Colour */
+    font-weight: normal;
+    text-decoration: underline;
+}
+
+a:hover 
+{
+    color: #005986;
+    background: #eeefff;
+    font-weight: normal;
+    text-decoration: underline;
+}
+
+p
+{
+    color: #000005; /* Citrix Rich Black */
+    font: 13px verdana, sans-serif;
+    font-weight: normal;
+    margin: 5px;
+}
+
+/* heading styles */
+h2 
+{
+    color: #0079BD; /* Citrix Ocean */
+    font: sans-serif;
+    font-size: 26px;
+    font-weight: normal;
+    line-height: 28px;
+}
+
+h3 
+{
+    color: #4D4F53; /* Citrix Gray */
+    font: sans-serif;
+    font-size: 23px;
+    font-weight: normal;
+    height: 16px;
+    line-height: 12px;
+    margin: 4px;
+    padding: 15px 1px 0px 0px;
+}
+
+
+/* generic table style */
+table
+{
+    color: #000005; /* Citrix Rich Black */
+    font-family: verdana, sans-serif;
+    background-color: #EDEDED;
+    height: 16px;
+    width : 100%;
+    border: 1px solid #666666;
+    /*border-collapse:collapse;*/
+    line-height: 1.3em;
+    margin: 5px auto;
+    padding: 4px;
+    position: relative;
+    text-align: left;
+    border-radius: 7px;
+    -moz-border-radius: 7px;
+    -moz-box-shadow: 0 0 7px #888888;
+    -webkit-border-radius: 7px;
+    -webkit-box-shadow: 0 0 7px #888888;
+    padding: 100ea;
+    border-spacing: 0; /* workaround to boarder-collapse:collapse issue */
+}
+
+table td
+{
+    font-size: 13px;
+    padding: 5px 4px 5px 3px;
+}
+
+table th 
+{
+    color: #FFFFFF;
+    background: #0079BD; /* Citrix Ocean */
+    font-size: 15px;
+    font-weight: normal;
+    text-align: left;
+    padding: 3px 2px 3px 3px;
+}
+
+/* Tablesorter styles 
+   See http://tablesorter.com/docs/
+*/
+table.tablesorter thead tr th, table.tablesorter tfoot tr th {
+
+}
+
+table.tablesorter thead tr .header {
+	background-image: url(bg.gif);
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+}
+
+table.tablesorter thead tr .headerSortUp {
+	background-image: url(asc.gif);
+}
+table.tablesorter thead tr .headerSortDown {
+	background-image: url(desc.gif);
+}
+table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
+
+}
+
+table th.headerSortUp { 
+    background-image: url(asc.gif); 
+    background-color: #3399FF; 
+    background-position: right; 
+} 
+
+table th.headerSortDown { 
+    background-image: url(desc.gif); 
+    background-color: #3399FF; 
+    background-position: right; 
+} 
+
+table th.header { 
+    background-image: url(asc.gif);     
+    cursor: pointer; 
+    background-repeat: no-repeat; 
+    background-position: right; 
+    padding-right: 20px; 
+    border: none;
+
+} 
+
+/* End TableSorter styles */
+
+/* table000 - summary */
+table#table000
+{
+    text-align: left;
+    width: 400px;
+    margin: 2px;
+}
+
+table#table000 tbody
+{
+    text-align: left;
+}
+
+table#table000 th
+{
+    font-size: 20px;
+    margin: 7px auto;
+    padding: 5px;
+}
+
+table#table000 tbody tr
+{
+    background-color: #DFDFEE;
+}
+
+table#table000 tbody tr:nth-child(odd) 
+{
+    background-color: #D0D0EF;
+}
+
+table#table000 tbody tr.fail 
+{
+    background-color: tomato;
+    color: #000005; /* Citrix Rich Black --> tried white as a recomendation to improve red readability but this doesn't work */
+}
+
+
+/* Detailed test results table. 
+   Colour rows by fail/pass/nontest/excluded/running/not run 
+*/
+table.TagSummary tbody tr
+{
+    background-color: #DFDFEE;
+}
+
+table.TagSummary tbody tr:nth-child(odd) 
+{
+    background-color: #D0D0EF;
+}
+
+table.TagSummary tr.pass
+{
+    background-color: lightgreen; /* LIGHER GREEN #33FF66; */
+    text-align: left;
+}
+
+table.TagSummary tbody tr.pass:nth-child(odd) 
+{
+    background-color: #66FF66;
+}
+
+table.TagSummary tr.nontest
+{
+    background-color: PowderBlue;
+    text-align: left;
+}
+
+table.TagSummary tbody tr.nontest:nth-child(odd) 
+{
+    background-color: #99CCCC;
+}
+
+table.TagSummary tr.fail 
+{
+    background-color: tomato;
+    color: #000005; /* Citrix Rich Black --> tried white as a recomendation to improve red readability but this doesn't work */
+}
+
+table.TagSummary tr.fail:nth-child(odd) 
+{
+    background-color: #E70707;
+    color: black;
+}
+
+table.TagSummary tr.excluded
+{
+    background-color: #C8C8C8;
+    text-align: left;
+}
+
+table.TagSummary tbody tr.excluded:nth-child(odd) 
+{
+    background-color: #A8A8A8;
+}
+
+table.TagSummary tr.NotStarted
+{
+    background-color: #F0FFFF;
+    text-align: left;
+}
+
+table.TagSummary tbody tr.NotStarted:nth-child(odd) 
+{
+    background-color: #D8E6E6;
+}
+
+table.TagSummary tr.Running
+{
+    background-color: #FFFF66;
+    text-align: left;
+}
+
+table.TagSummary tbody tr.Running:nth-child(odd) 
+{
+    background-color: #FFFF99;
+}
+
+
+/* Detailed test results table. 
+   Colour rows by fail/pass/nontest/excluded/running/not run 
+*/
+table.DetailedResults tbody tr
+{
+    background-color: #DFDFEE;
+}
+
+table.DetailedResults tbody tr:nth-child(odd) 
+{
+    background-color: #D0D0EF;
+}
+
+table.DetailedResults tr.pass
+{
+    background-color: lightgreen; /* LIGHER GREEN #33FF66; */
+    text-align: left;
+}
+
+table.DetailedResults tbody tr.pass:nth-child(odd) 
+{
+    background-color: #66FF66;
+}
+
+table.DetailedResults tr.nontest
+{
+    background-color: PowderBlue;
+    text-align: left;
+}
+
+table.DetailedResults tbody tr.nontest:nth-child(odd) 
+{
+    background-color: #99CCCC;
+}
+
+table.DetailedResults tr.fail 
+{
+    background-color: tomato;
+    color: #000005; /* Citrix Rich Black --> tried white as a recomendation to improve red readability but this doesn't work */
+}
+
+table.DetailedResults tr.fail:nth-child(odd) 
+{
+    background-color: #E70707;
+    color: black;
+}
+
+table.DetailedResults tr.excluded
+{
+    background-color: #C8C8C8;
+    text-align: left;
+}
+
+table.DetailedResults tbody tr.excluded:nth-child(odd) 
+{
+    background-color: #A8A8A8;
+}
+
+table.DetailedResults tr.NotStarted
+{
+    background-color: #F0FFFF;
+    text-align: left;
+}
+
+table.DetailedResults tbody tr.NotStarted:nth-child(odd) 
+{
+    background-color: #D8E6E6;
+}
+
+table.DetailedResults tr.Running
+{
+    background-color: #FFFF66;
+    text-align: left;
+}
+
+table.DetailedResults tbody tr.Running:nth-child(odd) 
+{
+    background-color: #FFFF99;
+}
+
+
+/* table002 - test log files */
+table.TestLogs body
+{
+    width: 13cm;
+}
+
+table.TestLogs th
+{
+    color: white;
+}
+
+table.TestLogs tbody tr
+{
+    background-color: #DFDFEE;
+}
+
+table.TestLogs tbody tr:nth-child(odd) 
+{
+    background-color: #D0D0EF;
+}
+
+
+/* Hosts */
+table.SystemsUnderTest th
+{
+    color: white;
+}
+
+table.SystemsUnderTest tbody tr
+{
+    background-color: #DFDFEE;
+}
+
+table.SystemsUnderTest tbody tr:nth-child(odd) 
+{
+    background-color: #D0D0EF;
+}
+
+/* test versions */
+table.TestVersions th
+{
+    color: white;
+}
+
+table.TestVersions tbody tr
+{
+    background-color: #DFDFEE;
+}
+
+table.TestVersions tbody tr:nth-child(odd) 
+{
+    background-color: #D0D0EF;
+}
+
+/* @end */

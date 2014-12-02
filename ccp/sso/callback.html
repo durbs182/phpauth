@@ -1,0 +1,203 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style>
+        li
+        {
+            list-style-type: none;
+        }
+
+        #state {
+            position: fixed;
+            top: 10px;
+            left: 60px;
+        }
+
+        #valid {
+            /*visibility: hidden;*/
+            /*border: solid;*/
+            position: fixed;
+            top: 150px;
+            left: 880px;
+        }
+
+        #token {
+            visibility: hidden;
+            border: solid;
+            position: fixed;
+            top: 10px;
+            left: 850px;
+            z-index: 1;
+        }
+
+        #arrow {
+            visibility: hidden;
+            width: 10px;
+            height: 10px;
+            position: fixed;
+            top: 50px;
+            left: 650px;
+            z-index: -1;
+        }
+
+        #resource {
+            visibility: hidden;
+            /*border: solid;*/
+            width: 240px;
+            height: 30px;
+            position: fixed;
+            top: 350px;
+            left: 830px;
+            z-index: -1;
+            padding-top: 10px;
+            padding-left: 0px;
+        }
+
+        #code {
+            width: 300px;
+            height: 150px;
+            position: fixed;
+            top: 250px;
+            left: 15px;
+        }
+
+        #box {
+            /*width: 200px;
+            height: 400px;*/
+            position: fixed;
+            top: 100px;
+            left: 450px;
+        }
+
+        /*.dropzone {
+            width: 200px;
+            height: 400px;
+            position: fixed;
+            top: 30px;
+            left: 450px;
+        }*/
+    </style>
+</head>
+<body>
+    
+    <script src="Scripts/jquery-2.0.2.js"></script>
+	
+    <script>
+	
+		
+        var baseUrl = 'https://mac-win8.cam.onelab.citrix.com/ccp/sso/callback.php';
+        var identityUrl = baseUrl;
+        var startphp = "start.php";
+		var unauthorized = "unauthorized.php";
+
+        function GetToken(code,state)
+        {
+            console.log("state=" + state);
+            console.log("code=" + code);
+
+            var tokenurl = "https://localhost/WebHostwin/users/oauth/token";
+			//var tokenurl = 'https://onelabscheduler.onelab.citrix.com/onelabauthwin/users/oauth/token';
+			
+            var redirect = location.href.replace(location.search, "");
+
+            var formData = "grant_type=authorization_code&code=" + code + "&redirect_uri=" + redirect;
+
+            var settings = {
+                type: "POST",
+                url: tokenurl,
+                async: true,
+                data: formData,
+                xhrFields: {
+                    withCredentials: true
+                },
+                error: function (xhr) {
+                    console.log("error " + xhr.status);
+                    window.location.href = startphp;
+                },
+                success: function (data) {
+                    //console.log(data);
+                    response = data;
+                    console.log(response.access_token);
+					var stateUrl = baseUrl + "?state=" + state;
+                    SendToken(response.access_token, state);
+                }
+            };
+
+            $.ajax(settings);
+        }
+
+        function SendToken(access_token, state)
+        {
+            var auth = "Authorization: Bearer " + access_token;
+			var stateUrl = baseUrl + "?state=" + state;
+			console.log(stateUrl);
+			var settings = {
+				type: "GET",
+				url: stateUrl,
+				async: false,
+				beforeSend: function (xhr) {
+					xhr.setRequestHeader("Authorization", "Bearer " + access_token);
+				},
+				success: function (text, textStatus, xhr) {
+					console.log(xhr.status);
+					response = text;
+					console.log(response);
+					window.location.href = response;
+				},
+				complete: function (xhr, textStatus) {
+					console.log("complete " + xhr.status);
+					console.log(textStatus);
+				},
+				error: function (xhr) {
+					console.log("error " + xhr.status);
+					window.location.href = startphp;
+				}
+			};
+
+			$.ajax(settings);
+        }
+        
+        $(function () {
+		
+            var params = {},
+                queryString = location.search.substring(1),
+                regex = /([^&=]+)=([^&]*)/g,
+                m;
+            while (m = regex.exec(queryString)) {
+                params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
+            }
+
+            if (params.error) {
+                console.log("error: " + params.error);
+                window.location.href = unauthorized;
+                return;
+            }
+
+            var state = sessionStorage["state"];
+			
+            console.log(location);
+            console.log(params.state);
+			console.log(state);
+            console.log(params.code);
+
+            if (params.state !== state) {
+                console.log("error: bad state");
+                window.location.href = startphp;
+                return;
+            }
+            // after validation remove to prevent -re-use
+            sessionStorage["state"] = "state is single use only";
+			
+            GetToken(params.code, params.state);
+        });
+
+    </script>
+
+
+
+
+
+
+</body>
+</html>
